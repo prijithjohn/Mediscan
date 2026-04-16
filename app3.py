@@ -12,7 +12,7 @@ import google.generativeai as genai
 import random
 import time
 
-genai.configure(api_key="AIzaSyCQZFQelIotVNl9DONuQC7dCJQQ4Qm4Kg0") #after replacing press cntrl + s
+genai.configure(api_key="") #use your own generate api key!!
 USER_DB = "users.json"
 
 def load_users():
