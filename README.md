@@ -117,6 +117,9 @@ streamlit run app.py
 **Prijith John**
 Computer Science Engineering Student
 
+**Prasanna K**
+Computer Science Engineering Student
+
 ---
 
 ## ⭐ Acknowledgements
