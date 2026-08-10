@@ -22,6 +22,12 @@ jobs:
       SMTP_PORT: ""
       SMTP_USERNAME: ""
       SMTP_PASSWORD: ""
+      POSTGRES_USER: "ci_user"
+      POSTGRES_DB: "ci_db"
+      POSTGRES_PASSWORD: "ci_password"
+      SECRET_KEY: "ci_test_secret"
+      ALERT_EMAIL: "test@example.com"
+      RAPIDAPI_HOST: "example.test"
 
     steps:
       - name: Checkout repository
