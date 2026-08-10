@@ -4,12 +4,18 @@ __pycache__/
 *.pyd
 .env
 .env.*
+dev.db
+*.db
+*.db-journal
+*.sqlite3
+.pytest_cache/
+.venv/
+venv/
 users.json
 .DS_Store
 .idea/
 .vscode/
 *.log
-*.sqlite3
 __pycache__/
 
 # Streamlit
