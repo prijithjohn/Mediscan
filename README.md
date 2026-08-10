@@ -79,7 +79,16 @@ EMAIL_PASSWORD=your_email_app_password
 
 ### 4️⃣ Run the Application
 
+From the repository root:
+
 ```bash
+streamlit run frontend/app.py
+```
+
+Or from the `frontend` folder:
+
+```bash
+cd frontend
 streamlit run app.py
 ```
 

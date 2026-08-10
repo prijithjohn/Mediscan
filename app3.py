@@ -8,11 +8,25 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
+from dotenv import load_dotenv
 import google.generativeai as genai
 import random
 import time
 
-genai.configure(api_key="") #use your own generate api key!!
+load_dotenv()
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+RAPIDAPI_KEY = os.getenv("RAPIDAPI_KEY", "")
+RAPIDAPI_HOST = os.getenv("RAPIDAPI_HOST", "pen-to-print-handwriting-ocr.p.rapidapi.com")
+EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", "587"))
+EMAIL_SENDER = os.getenv("EMAIL_SENDER", "")
+EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD", "")
+DATABASE_URL = os.getenv("DATABASE_URL", "")
+
+if GEMINI_API_KEY:
+    genai.configure(api_key=GEMINI_API_KEY)
+
 USER_DB = "users.json"
 
 def load_users():
@@ -67,28 +81,25 @@ def login_user():
             st.error("Invalid username or password.")
 
 def send_email(to_email, subject, body):
-    sender_email = "firstname7302@gmail.com"  # Replace with your email
-    sender_password = "trem jgiq fptt wjqg"  # Replace with your email password or app password
+    if not EMAIL_SENDER or not EMAIL_PASSWORD:
+        st.error("Email service is not configured. Set EMAIL_SENDER and EMAIL_PASSWORD in .env.")
+        return False
 
-    # Set up the email
     msg = MIMEMultipart()
-    msg['From'] = sender_email
+    msg['From'] = EMAIL_SENDER
     msg['To'] = to_email
     msg['Subject'] = subject
-
-    # Add the body
     msg.attach(MIMEText(body, 'plain'))
 
     try:
-        # Connect to the server and send the email
-        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server = smtplib.SMTP(EMAIL_HOST, EMAIL_PORT)
         server.starttls()
-        server.login(sender_email, sender_password)
+        server.login(EMAIL_SENDER, EMAIL_PASSWORD)
         server.send_message(msg)
         server.quit()
         return True
     except Exception as e:
-        st.error(f"Failed to send email: {e}")
+        st.error("Failed to send email. Check email configuration and environment variables.")
         return False
 
 # Symptom-based disease identification
@@ -187,9 +198,12 @@ def call_handwriting_api(image_bytes):
         "Content-Type: image/jpeg\r\n\r\n"
     ).encode("utf-8") + image_bytes + f"\r\n--{boundary}--\r\n".encode("utf-8")
     
+    if not RAPIDAPI_KEY:
+        raise ValueError("OCR API key is not configured. Set RAPIDAPI_KEY in .env.")
+
     headers = {
-        'x-rapidapi-key': "2a9c405c14mshc66d154f6b62900p1551d6jsn8c3e9ee14c79",
-        'x-rapidapi-host': "pen-to-print-handwriting-ocr.p.rapidapi.com",
+        'x-rapidapi-key': RAPIDAPI_KEY,
+        'x-rapidapi-host': RAPIDAPI_HOST,
         'Content-Type': f"multipart/form-data; boundary={boundary}"
     }
 

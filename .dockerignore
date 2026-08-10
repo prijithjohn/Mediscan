@@ -1,0 +1,11 @@
+.git
+.gitignore
+.env
+*.pyc
+__pycache__/
+.pytest_cache/
+dev.db
+users.json
+*.log
+*.sqlite3
+frontend/.streamlit
