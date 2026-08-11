@@ -21,9 +21,9 @@ FROM base AS backend
 WORKDIR /app
 EXPOSE 8000
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
-CMD ["uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["sh", "-c", "uvicorn backend.app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
 
 FROM base AS frontend
 WORKDIR /app
 EXPOSE 8501
-CMD ["streamlit", "run", "frontend/app.py", "--server.port", "8501", "--server.address", "0.0.0.0", "--server.headless", "true"]
+CMD ["sh", "-c", "streamlit run frontend/app.py --server.address 0.0.0.0 --server.port ${PORT:-8501}"]
