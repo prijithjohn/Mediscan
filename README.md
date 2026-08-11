@@ -18,27 +18,26 @@ Built with modern backend engineering practices including REST APIs, PostgreSQL,
 
 # 📸 Screenshots
 
-> Replace these placeholders with actual screenshots.
 
 ### 🏠 Dashboard
 
-![MediScan Dashboard](screenshots/dashboard.png)
+![MediScan Dashboard](Images/MediScan_Dashboard.png)
 
 ### 📤 Prescription Upload
 
-![Prescription Upload](screenshots/upload.png)
+![Prescription Upload](Images/MediScan_Prescription.png)
 
 ### 🤖 AI Prescription Analysis
 
-![AI Analysis](screenshots/analysis.png)
+![AI Analysis](Images/MediScan_Analysis.png)
 
 ### 📋 Prescription History
 
-![Prescription History](screenshots/history.png)
+![Prescription History](Images/MediScan_History.png)
 
 ### 🚨 Alerts
 
-![Alerts](screenshots/alerts.png)
+![Alerts](Images/MediScan_Alerts.png)
 
 ---
 
